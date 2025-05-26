@@ -1,11 +1,12 @@
+{{-- resources/views/dashboard/admin.blade.php --}}
 <x-app-layout>
     <x-slot name="header">
-        Dashboard Dokter
+        Dashboard Petugas
     </x-slot>
 
     <div class="py-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <h1 class="text-xl font-bold mb-6">Selamat datang, Dokter!</h1>
+            <h1 class="text-xl font-bold mb-6">Selamat datang, Petugas!</h1>
 
             {{-- Grid Card Buttons --}}
             <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -39,4 +40,3 @@
         </div>
     </div>
 </x-app-layout>
-

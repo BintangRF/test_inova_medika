@@ -1,61 +1,158 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+```markdown
+# 🏥 Aplikasi Manajemen Klinik - Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistem ini dirancang untuk mengelola aktivitas operasional klinik, mulai dari pengelolaan data master hingga transaksi pasien dan laporan berbasis data. Dibangun menggunakan Laravel 10+, sistem ini mendukung fitur role-based access control (RBAC), CRUD, pembayaran, dan visualisasi laporan.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Fitur Utama
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 1. Manajemen Data Master
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+CRUD (Create, Read, Update, Delete) untuk entitas berikut:
 
-## Learning Laravel
+-   **Pasien**: Data pasien klinik (nama, NIK, alamat, no. telepon).
+-   **Pegawai**: Data pegawai klinik beserta jabatan dan peran.
+-   **Tindakan**: Jenis layanan medis seperti periksa umum, cek laboratorium, dll.
+-   **Obat**: Daftar obat yang tersedia, termasuk harga.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 2. Transaksi Pendaftaran Pasien
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Menu ini memungkinkan petugas untuk:
 
-## Laravel Sponsors
+-   Menginput data **pasien baru** sekaligus,
+-   Melakukan pendaftaran **kunjungan** pada tanggal tertentu dan memilih jenis kunjungan (umum, BPJS, dll).
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+📝 Input disimpan langsung ke dua tabel:
 
-### Premium Partners
+-   `pasien`
+-   `kunjungan_pasien` (pembuatan otomatis ketika pasien mendaftar)
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+---
 
-## Contributing
+### 3. Transaksi Tindakan & Obat
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Setelah pasien terdaftar:
 
-## Code of Conduct
+-   Dokter/petugas dapat memberikan **tindakan medis**,
+-   Menambahkan **obat yang diresepkan**.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Fitur:
 
-## Security Vulnerabilities
+-   Tombol aksi "Proses" untuk menambahkan tindakan dan obat,
+-   Tombol "Edit" untuk memperbarui semua data transaksi,
+-   Semua data dicatat di tabel `transaksi_tindakan`.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+### 4. Pembayaran (Tagihan Pasien)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Fitur ini digunakan oleh kasir untuk:
+
+-   Melihat daftar tagihan pasien yang belum dibayar,
+-   Melakukan pembayaran dan menandai transaksi sebagai `paid`.
+
+Detail:
+
+-   Total tagihan dihitung dari **harga tindakan + harga obat**,
+-   Tagihan disaring berdasarkan transaksi yang belum dibayar (`is_paid = false`).
+
+---
+
+### 5. Laporan Visualisasi Data
+
+Laporan tersedia untuk administrator dengan visualisasi sederhana:
+
+-   📊 **Jumlah kunjungan pasien per bulan**,
+-   🩺 **Jenis tindakan terbanyak dilakukan**,
+-   💊 **Obat yang paling sering diresepkan**.
+
+Data disajikan dalam bentuk list (bisa dikembangkan menggunakan grafik/Chart.js).
+
+---
+
+## 🔐 Role-Based Access Control (RBAC)
+
+Aplikasi mendukung sistem peran:
+
+-   **Admin**: Akses penuh ke seluruh fitur.
+-   **Petugas**: Bisa mengelola pendaftaran dan input transaksi.
+-   **Dokter**: Bisa memproses tindakan dan obat.
+-   **Kasir**: Bisa mengakses dan memproses pembayaran.
+
+---
+
+## ⚙️ Teknologi yang Digunakan
+
+-   **Laravel 10+**
+-   **Blade Components & Tailwind CSS**
+-   **MySQL** untuk penyimpanan data
+-   **Laravel Breeze** (atau Jetstream/Fortify) untuk otentikasi
+-   **Middleware & Policy** untuk RBAC
+-   **Eloquent Relationship** untuk manajemen relasi data
+-   **Chart.js** _(opsional untuk grafik)_
+
+---
+
+## 📁 Struktur Folder Penting
+```
+
+app/
+├── Models/ # Model Eloquent untuk semua entitas
+├── Http/Controllers/ # Controller untuk CRUD, transaksi, dan laporan
+resources/views/ # Blade templates untuk tampilan frontend
+routes/web.php # Routing aplikasi
+database/migrations/ # Struktur database
+
+````
+
+---
+
+## 📦 Cara Menjalankan Aplikasi
+
+1. Clone repo ini:
+   ```bash
+   git clone https://github.com/username/klinik-app.git
+   cd klinik-app
+````
+
+2. Install dependensi:
+
+    ```bash
+    composer install
+    npm install && npm run dev
+    ```
+
+3. Salin file `.env` dan buat database:
+
+    ```bash
+    cp .env.example .env
+    php artisan key:generate
+    php artisan migrate --seed
+    ```
+
+4. Jalankan server:
+
+    ```bash
+    php artisan serve
+    ```
+
+---
+
+## 🙌 Kontribusi
+
+Kontribusi sangat diterima! Silakan fork, buat branch baru, dan ajukan pull request.
+
+---
+
+## 📄 Lisensi
+
+Aplikasi ini menggunakan lisensi [MIT](LICENSE).
+
+```
+
+---
+
+```
