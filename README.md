@@ -123,12 +123,11 @@ database/migrations/ # Struktur database
 ## 📦 Cara Menjalankan Aplikasi
 
 1. Clone repo ini:
+
     ```bash
     git clone https://github.com/username/klinik-app.git
     cd klinik-app
     ```
-
-````
 
 2. Install dependensi:
 
@@ -150,37 +149,36 @@ database/migrations/ # Struktur database
     ```bash
     php artisan serve
     ```
-````
 
 ---
 
 ## Screenshots
 
 1. AUTH
-   ![WELCOME](http://localhost:8000/images/welcome.png)
-   ![LOGIN](http://localhost:8000/images/login.png)
-   ![REGISTER](http://localhost:8000/images/register.png)
+   ![WELCOME](public/images/welcome.png)
+   ![LOGIN](public/images/login.png)
+   ![REGISTER](public/images/register.png)
 
 2. ADMIN
-   ![Admin Dashboard](http://localhost:8000/images/admin-dashboard.png)  
-   ![CRUD Obat](http://localhost:8000/images/crud-obat.png)
-   ![CRUD Pegawai](http://localhost:8000/images/crud-pegawai.png)
-   ![CRUD Tindakan](http://localhost:8000/images/crud-tindakan.png)
-   ![CRUD User](http://localhost:8000/images/crud-user.png)
-   ![CRUD Wilayah](http://localhost:8000/images/crud-wilayah.png)
-   ![Report](http://localhost:8000/images/report.png)
+   ![Admin Dashboard](public/images/admin-dashboard.png)  
+   ![CRUD Obat](public/images/crud-obat.png)
+   ![CRUD Pegawai](public/images/crud-pegawai.png)
+   ![CRUD Tindakan](public/images/crud-tindakan.png)
+   ![CRUD User](public/images/crud-user.png)
+   ![CRUD Wilayah](public/images/crud-wilayah.png)
+   ![Report](public/images/report.png)
 
 3. Petugas
-   ![Petugas Dashboard](http://localhost:8000/images/petugas-dashboard.png)
-   ![Data Tindakan pada Pasien](http://localhost:8000/images/data-tindakan-pada-pasien-2.png)
-   ![Daftar Pasien](http://localhost:8000/images/daftar-pasien-2.png)
+   ![Petugas Dashboard](public/images/petugas-dashboard.png)
+   ![Data Tindakan pada Pasien](public/images/data-tindakan-pada-pasien-2.png)
+   ![Daftar Pasien](public/images/daftar-pasien-2.png)
 
 4. Dokter
-   ![Dokter Dashboard](http://localhost:8000/images/dokter-dashboard.png)
-   ![Data Tindakan pada Pasien](http://localhost:8000/images/data-tindakan-pada-pasien.png)
-   ![Daftar Pasien](http://localhost:8000/images/daftar-pasien.png)
-   ![Proses Pasien](http://localhost:8000/images/proses-tindakan-pasien.png)
+   ![Dokter Dashboard](public/images/dokter-dashboard.png)
+   ![Data Tindakan pada Pasien](public/images/data-tindakan-pada-pasien.png)
+   ![Daftar Pasien](public/images/daftar-pasien.png)
+   ![Proses Pasien](public/images/proses-tindakan-pasien.png)
 
 5. Kasir
-   ![Kasir Dashboard](http://localhost:8000/images/kasir-dashboard.png)
-   ![Pembayaran](http://localhost:8000/images/pembayaran.png)
+   ![Kasir Dashboard](public/images/kasir-dashboard.png)
+   ![Pembayaran](public/images/pembayaran.png)
