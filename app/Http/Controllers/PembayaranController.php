@@ -9,18 +9,18 @@ class PembayaranController extends Controller
 {
     public function index()
     {
-        $kunjungans = TransaksiTindakan::with(['kunjungan.pasien', 'tindakan', 'obat'])
+        $transaksi_tindakans = TransaksiTindakan::with(['kunjungan.pasien', 'tindakan', 'obat'])
             ->where('is_paid', false)
             ->get();
 
-        return view('pembayaran.index', compact('kunjungans'));
+        return view('pembayaran.index', compact('transaksi_tindakans'));
     }
 
-    public function bayar($id)
+    public function update($id)
     {
-        $kunjungan = TransaksiTindakan::findOrFail($id);
-        $kunjungan->is_paid = true;
-        $kunjungan->save();
+        $transaksi_tindakan = TransaksiTindakan::findOrFail($id);
+        $transaksi_tindakan->is_paid = true;
+        $transaksi_tindakan->save();
 
         return redirect()->route('pembayaran.index')->with('success', 'Pembayaran berhasil diselesaikan.');
     }

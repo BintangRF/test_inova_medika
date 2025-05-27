@@ -3,20 +3,23 @@
         <h2 class="text-xl font-semibold text-gray-800">Daftar Pasien & Kunjungan</h2>
     </x-slot>
 
-    <div class="py-8 max-w-5xl mx-auto">
-        <div class="mb-4">
-            <a href="{{ route('pasien-kunjungan.create') }}" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">
+    <div class="max-w-5xl py-8 mx-auto">
+
+        @if(auth()->user()->role !== 'dokter')
+            <div class="mb-4">
+            <a href="{{ route('pasien-kunjungan.create') }}" class="px-4 py-2 text-white transition bg-indigo-600 rounded hover:bg-indigo-700">
                 Tambah Pendaftaran
             </a>
         </div>
+        @endif
 
         @if(session('success'))
-            <div class="mb-6 p-4 bg-green-100 border border-green-200 text-green-800 rounded">
+            <div class="p-4 mb-6 text-green-800 bg-green-100 border border-green-200 rounded">
                 {{ session('success') }}
             </div>
         @endif
 
-        <div class="bg-white shadow rounded-lg overflow-x-auto">
+        <div class="overflow-x-auto bg-white rounded-lg shadow">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
@@ -25,10 +28,12 @@
                         <th class="px-4 py-2">NIK</th>
                         <th class="px-4 py-2">Jenis Kunjungan</th>
                         <th class="px-4 py-2">Tanggal</th>
-                        <th class="px-4 py-2">Aksi</th>
+                        @if(auth()->user()->role !== 'petugas')
+                            <th class="px-4 py-2">Aksi</th>
+                        @endif
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100 bg-white">
+                <tbody class="bg-white divide-y divide-gray-100">
                     @forelse ($pasiens as $pasien)
                         <tr>
                             <td class="px-4 py-2">{{ $loop->iteration }}</td>
@@ -36,15 +41,17 @@
                             <td class="px-4 py-2">{{ $pasien->nik }}</td>
                             <td class="px-4 py-2">{{ $pasien->kunjungan->first()?->jenis_kunjungan ?? '-' }}</td>
                             <td class="px-4 py-2">{{ $pasien->kunjungan->first()?->tanggal_kunjungan ?? '-' }}</td>
-                            <td class="px-4 py-2 flex gap-2">
-                                <a href="{{ route('transaksi-tindakan.create', $pasien->kunjungan->first()?->id) }}"
-                                        class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600">Proses</a>
+                            @if(auth()->user()->role !== 'petugas')
+                            <td class="flex gap-2 px-4 py-2">
+                                <a href="{{ route('kunjungan.transaksi-tindakan.create', $pasien->kunjungan->first()?->id) }}"
+                                        class="px-3 py-1 text-white bg-green-500 rounded hover:bg-green-600">Proses</a>
 
-                                <a href="{{ route('pasien-kunjungan.edit', $pasien->id) }}" class="px-3 py-1 bg-yellow-400 text-white rounded hover:bg-yellow-500">Edit</a>
+                                {{-- <a href="{{ route('pasien-kunjungan.edit', $pasien->id) }}" class="px-3 py-1 text-white bg-yellow-400 rounded hover:bg-yellow-500">Edit</a> --}}
                             </td>
+                            @endif                           
                         </tr>
                     @empty
-                        <tr><td colspan="6" class="text-center py-4 text-gray-500">Belum ada data</td></tr>
+                        <tr><td colspan="6" class="py-4 text-center text-gray-500">Belum ada data</td></tr>
                     @endforelse
                 </tbody>
             </table>

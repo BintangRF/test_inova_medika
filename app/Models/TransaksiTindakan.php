@@ -13,6 +13,7 @@ class TransaksiTindakan extends Model
         'kunjungan_id',
         'tindakan_id',
         'obat_id',
+        'jumlah_obat',
         'keterangan',
     ];
 

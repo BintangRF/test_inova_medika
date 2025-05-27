@@ -1,4 +1,3 @@
-```markdown
 # 🏥 Aplikasi Manajemen Klinik - Laravel
 
 Sistem ini dirancang untuk mengelola aktivitas operasional klinik, mulai dari pengelolaan data master hingga transaksi pasien dan laporan berbasis data. Dibangun menggunakan Laravel 10+, sistem ini mendukung fitur role-based access control (RBAC), CRUD, pembayaran, dan visualisasi laporan.
@@ -7,7 +6,20 @@ Sistem ini dirancang untuk mengelola aktivitas operasional klinik, mulai dari pe
 
 ## 🚀 Fitur Utama
 
-### 1. Manajemen Data Master
+### 1. Autentikasi & Role Pengguna
+
+Sistem mendukung autentikasi pengguna dengan pembagian peran (role-based access control):
+
+-   **Admin**: Memiliki akses penuh ke seluruh fitur aplikasi,
+-   **Dokter**: Dapat mengakses dan memproses tindakan medis serta meresepkan obat untuk pasien.
+-   **Kasir**: Bertanggung jawab untuk melihat, memproses, dan menandai pembayaran tagihan pasien.
+-   **Petugas**: Mengelola pendaftaran pasien baru, kunjungan, serta input data transaksi awal.
+
+Setiap pengguna harus login untuk mengakses aplikasi, dan fitur yang tersedia akan menyesuaikan dengan peran yang dimiliki.
+
+---
+
+### 2. Manajemen Data Master
 
 CRUD (Create, Read, Update, Delete) untuk entitas berikut:
 
@@ -18,7 +30,7 @@ CRUD (Create, Read, Update, Delete) untuk entitas berikut:
 
 ---
 
-### 2. Transaksi Pendaftaran Pasien
+### 3. Transaksi Pendaftaran Pasien
 
 Menu ini memungkinkan petugas untuk:
 
@@ -32,22 +44,22 @@ Menu ini memungkinkan petugas untuk:
 
 ---
 
-### 3. Transaksi Tindakan & Obat
+### 4. Transaksi Tindakan & Obat
 
 Setelah pasien terdaftar:
 
 -   Dokter/petugas dapat memberikan **tindakan medis**,
--   Menambahkan **obat yang diresepkan**.
+-   Menambahkan **obat yang diresepkan**,
+-   Otomatis mengurangi **jumlah stok obat yang diresepkan**.
 
 Fitur:
 
 -   Tombol aksi "Proses" untuk menambahkan tindakan dan obat,
--   Tombol "Edit" untuk memperbarui semua data transaksi,
 -   Semua data dicatat di tabel `transaksi_tindakan`.
 
 ---
 
-### 4. Pembayaran (Tagihan Pasien)
+### 5. Pembayaran (Tagihan Pasien)
 
 Fitur ini digunakan oleh kasir untuk:
 
@@ -61,7 +73,7 @@ Detail:
 
 ---
 
-### 5. Laporan Visualisasi Data
+### 6. Laporan Visualisasi Data
 
 Laporan tersedia untuk administrator dengan visualisasi sederhana:
 
@@ -97,25 +109,25 @@ Aplikasi mendukung sistem peran:
 ---
 
 ## 📁 Struktur Folder Penting
-```
 
-app/
+```app/
 ├── Models/ # Model Eloquent untuk semua entitas
 ├── Http/Controllers/ # Controller untuk CRUD, transaksi, dan laporan
 resources/views/ # Blade templates untuk tampilan frontend
 routes/web.php # Routing aplikasi
 database/migrations/ # Struktur database
-
-````
+```
 
 ---
 
 ## 📦 Cara Menjalankan Aplikasi
 
 1. Clone repo ini:
-   ```bash
-   git clone https://github.com/username/klinik-app.git
-   cd klinik-app
+    ```bash
+    git clone https://github.com/username/klinik-app.git
+    cd klinik-app
+    ```
+
 ````
 
 2. Install dependensi:
@@ -138,21 +150,37 @@ database/migrations/ # Struktur database
     ```bash
     php artisan serve
     ```
+````
 
 ---
 
-## 🙌 Kontribusi
+## Screenshots
 
-Kontribusi sangat diterima! Silakan fork, buat branch baru, dan ajukan pull request.
+1. AUTH
+   ![WELCOME](http://localhost:8000/images/welcome.png)
+   ![LOGIN](http://localhost:8000/images/login.png)
+   ![REGISTER](http://localhost:8000/images/register.png)
 
----
+2. ADMIN
+   ![Admin Dashboard](http://localhost:8000/images/admin-dashboard.png)  
+   ![CRUD Obat](http://localhost:8000/images/crud-obat.png)
+   ![CRUD Pegawai](http://localhost:8000/images/crud-pegawai.png)
+   ![CRUD Tindakan](http://localhost:8000/images/crud-tindakan.png)
+   ![CRUD User](http://localhost:8000/images/crud-user.png)
+   ![CRUD Wilayah](http://localhost:8000/images/crud-wilayah.png)
+   ![Report](http://localhost:8000/images/report.png)
 
-## 📄 Lisensi
+3. Petugas
+   ![Petugas Dashboard](http://localhost:8000/images/petugas-dashboard.png)
+   ![Data Tindakan pada Pasien](http://localhost:8000/images/data-tindakan-pada-pasien-2.png)
+   ![Daftar Pasien](http://localhost:8000/images/daftar-pasien-2.png)
 
-Aplikasi ini menggunakan lisensi [MIT](LICENSE).
+4. Dokter
+   ![Dokter Dashboard](http://localhost:8000/images/dokter-dashboard.png)
+   ![Data Tindakan pada Pasien](http://localhost:8000/images/data-tindakan-pada-pasien.png)
+   ![Daftar Pasien](http://localhost:8000/images/daftar-pasien.png)
+   ![Proses Pasien](http://localhost:8000/images/proses-tindakan-pasien.png)
 
-```
-
----
-
-```
+5. Kasir
+   ![Kasir Dashboard](http://localhost:8000/images/kasir-dashboard.png)
+   ![Pembayaran](http://localhost:8000/images/pembayaran.png)

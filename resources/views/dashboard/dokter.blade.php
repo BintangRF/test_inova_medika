@@ -4,13 +4,13 @@
     </x-slot>
 
     <div class="py-4">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <h1 class="text-xl font-bold mb-6">Selamat datang, Dokter!</h1>
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <h1 class="mb-6 text-xl font-bold">Selamat datang, Dokter!</h1>
 
             {{-- Grid Card Buttons --}}
-            <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-2 gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 {{-- Card Button --}}
-                <a href="{{ route('pasien-kunjungan.index') }}" class="bg-white border border-gray-200 rounded-xl p-6 shadow hover:shadow-md hover:bg-blue-50 transition">
+                <a href="{{ route('pasien-kunjungan.index') }}" class="p-6 transition bg-white border border-gray-200 shadow rounded-xl hover:shadow-md hover:bg-blue-50">
                     <div class="flex items-center justify-between mb-2">
                         <span class="text-lg font-semibold text-gray-700">Kunjungan Pasien</span>
                         <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
@@ -22,7 +22,7 @@
                     <p class="text-sm text-gray-500">Kelola data kunjungan pasien secara lengkap</p>
                 </a>
 
-                <a href="{{ route('transaksi.tindakan.index') }}" class="bg-white border border-gray-200 rounded-xl p-6 shadow hover:shadow-md hover:bg-blue-50 transition">
+                <a href="{{ route('transaksi-tindakan.index') }}" class="p-6 transition bg-white border border-gray-200 shadow rounded-xl hover:shadow-md hover:bg-blue-50">
                     <div class="flex items-center justify-between mb-2">
                         <span class="text-lg font-semibold text-gray-700">Data Tindakan Pasien</span>
                         <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"

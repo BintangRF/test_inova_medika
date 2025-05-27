@@ -40,23 +40,24 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('pegawai', PegawaiController::class);
     Route::resource('tindakan', TindakanController::class);
     Route::resource('obat', ObatController::class);
-    Route::get('/laporan', [laporanController::class, 'index'])->name('laporan.index');
+    Route::resource('laporan', LaporanController::class)->only(['index']);
 });
 
 Route::middleware(['auth', 'role:petugas,dokter'])->group(function () {
-    Route::get('/pasien-kunjungan', [PasienKunjunganController::class, 'index'])->name('pasien-kunjungan.index');
-    Route::get('/pasien-kunjungan/create', [PasienKunjunganController::class, 'create'])->name('pasien-kunjungan.create');
-    Route::post('/pasien-kunjungan', [PasienKunjunganController::class, 'store'])->name('pasien-kunjungan.store');
-    Route::get('/pasien-kunjungan/{id}/edit', [PasienKunjunganController::class, 'edit'])->name('pasien-kunjungan.edit');
-    Route::put('/pasien-kunjungan/{id}', [PasienKunjunganController::class, 'update'])->name('pasien-kunjungan.update');
-    Route::get('/transaksi-tindakan/{kunjungan}/create', [TransaksiTindakanController::class, 'create'])->name('transaksi-tindakan.create');
-    Route::post('/transaksi-tindakan/{kunjungan}', [TransaksiTindakanController::class, 'store'])->name('transaksi-tindakan.store');
-    Route::get('/transaksi/tindakan', [\App\Http\Controllers\TransaksiTindakanController::class, 'index'])->name('transaksi.tindakan.index');
+    Route::get('pasien-kunjungan', [PasienKunjunganController::class, 'index'])->name('pasien-kunjungan.index');
+    Route::resource('transaksi-tindakan', TransaksiTindakanController::class)->only(['index']);
+});
+
+Route::middleware(['auth', 'role:petugas'])->group(function () {
+    Route::resource('pasien-kunjungan', PasienKunjunganController::class)->except(['index', 'show', 'destroy']);
+});
+
+Route::middleware(['auth', 'role:dokter'])->group(function () {
+    Route::resource('kunjungan.transaksi-tindakan', TransaksiTindakanController::class)->only(['create', 'store']);
 });
 
 Route::middleware(['auth', 'role:kasir'])->group(function () {
-    Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
-    Route::post('/pembayaran/{id}/bayar', [PembayaranController::class, 'bayar'])->name('pembayaran.bayar');
+    Route::resource('pembayaran', PembayaranController::class)->only(['index', 'update']);
 });
 
 
