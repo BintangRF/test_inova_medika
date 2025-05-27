@@ -182,3 +182,22 @@ database/migrations/ # Struktur database
 5. Kasir
    ![Kasir Dashboard](public/images/kasir-dashboard.png)
    ![Pembayaran](public/images/pembayaran.png)
+
+6. Tabel
+
+    - **Tabel Kunjungan**
+      ![Tabel Kunjungan](public/images/tabel-kunjungan.png)
+    - **Tabel Obat**
+      ![Tabel Obat](public/images/tabel-obat.png)
+    - **Tabel Pasien**
+      ![Tabel Pasien](public/images/tabel-pasien.png)
+    - **Tabel Pegawai**
+      ![Tabel Pegawai](public/images/tabel-pegawai.png)
+    - **Tabel Tindakan**
+      ![Tabel Tindakan](public/images/tabel-tindakan.png)
+    - **Tabel Transaksi Tindakan**
+      ![Tabel Transaksi Tindakan](public/images/tabel-transaksi-tindakan.png)
+    - **Tabel Wilayah**
+      ![Tabel Wilayah](public/images/tabel-wilayah.png)
+    - **Tabel User**
+      ![Tabel User](public/images/tabel-user.png)
